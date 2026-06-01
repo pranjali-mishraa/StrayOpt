@@ -17,11 +17,11 @@ export default function App() {
         
         {/* Navbar sits outside Routes so it shows on every page */}
         <Navbar />
-        <Home/>
+       
         <Routes>
 
           {/* ── Public routes ── */}
-          <Route path="/"       element={<div>Home page coming soon 🐾</div>} />
+          <Route path="/" element={<Home />} />
           <Route path="/about"  element={<div>About page coming soon 🐾</div>} />
           <Route path="/login"  element={<div>Login page coming soon 🐾</div>} />
           <Route path="/register" element={<div>Register page coming soon 🐾</div>} />

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PetGrid from "../components/PetGrid";
+import ReviewGrid from "../components/ReviewGrid";
 
 export default function Home() {
   return (
@@ -119,6 +121,143 @@ export default function Home() {
 
       </section>
 
+            {/* ── HOW IT WORKS SECTION ── */}
+<section className="bg-cream py-20 px-6">
+
+{/* Section header */}
+<div className="text-center mb-16">
+  <div className="flex items-center justify-center gap-3 mb-3">
+    <span className="w-8 h-[2px] bg-rust rounded-full" />
+    <p className="text-rust text-[13px] font-medium uppercase tracking-widest">
+      How It Works
+    </p>
+    <span className="w-8 h-[2px] bg-rust rounded-full" />
+  </div>
+  <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-semibold text-bark-dark">
+    Pet Adoption Process
+  </h2>
+</div>
+
+{/* Steps grid */}
+<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+
+  {/* ── Step 1 ── */}
+  <div className="flex flex-col items-center text-center group">
+    {/* Blob image container */}
+    <div className="relative w-[220px] h-[220px] mb-8">
+      {/* Rust blob behind */}
+      <div className="absolute inset-0 bg-rust rounded-[60%_40%_55%_45%/50%_60%_40%_50%] scale-110 transition-transform duration-500 group-hover:scale-115" />
+      {/* Warm blob */}
+      <div className="absolute inset-2 bg-warm rounded-[55%_45%_60%_40%/45%_55%_45%_55%] overflow-hidden">
+        {/* Replace src with your step 1 image */}
+        <img
+          src="/step1.jpg"
+          alt="Person uploading a stray animal photo"
+          className="w-full h-full object-cover"
+        />
+        {/* Fallback if no image */}
+        <div className="absolute inset-0 flex items-center justify-center bg-warm">
+          <span className="text-6xl">📸</span>
+        </div>
+      </div>
+      {/* Step number badge */}
+      <div className="absolute -top-2 -right-2 w-12 h-12 bg-cream border-4 border-warm rounded-full flex items-center justify-center shadow-md z-10">
+        <span className="font-display text-[1.3rem] font-bold text-rust">1</span>
+      </div>
+    </div>
+
+    <h3 className="font-display text-[1.3rem] font-semibold text-bark-dark mb-3">
+      Spot & Upload
+    </h3>
+    <p className="text-text-mid text-[14.5px] leading-relaxed max-w-[240px]">
+      Found a stray nearby? Take a photo, add the location and a short
+      description, and post it on StrayOpt in under a minute.
+    </p>
+  </div>
+
+  {/* ── Step 2 ── */}
+  <div className="flex flex-col items-center text-center group">
+    <div className="relative w-[220px] h-[220px] mb-8">
+      <div className="absolute inset-0 bg-bark rounded-[45%_55%_40%_60%/60%_40%_55%_45%] scale-110 transition-transform duration-500 group-hover:scale-115" />
+      <div className="absolute inset-2 bg-warm rounded-[50%_50%_55%_45%/45%_55%_50%_50%] overflow-hidden">
+        <img
+          src="/step2.jpg"
+          alt="User contacting the poster"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-warm">
+          <span className="text-6xl">💬</span>
+        </div>
+      </div>
+      <div className="absolute -top-2 -right-2 w-12 h-12 bg-cream border-4 border-warm rounded-full flex items-center justify-center shadow-md z-10">
+        <span className="font-display text-[1.3rem] font-bold text-bark">2</span>
+      </div>
+    </div>
+
+    <h3 className="font-display text-[1.3rem] font-semibold text-bark-dark mb-3">
+      Connect & Ask
+    </h3>
+    <p className="text-text-mid text-[14.5px] leading-relaxed max-w-[240px]">
+      See an animal you'd like to adopt? Message the person who posted it
+      directly through StrayOpt and arrange a time to meet.
+    </p>
+  </div>
+
+  {/* ── Step 3 ── */}
+  <div className="flex flex-col items-center text-center group">
+    <div className="relative w-[220px] h-[220px] mb-8">
+      <div className="absolute inset-0 bg-rust rounded-[55%_45%_45%_55%/40%_60%_40%_60%] scale-110 transition-transform duration-500 group-hover:scale-115" />
+      <div className="absolute inset-2 bg-warm rounded-[45%_55%_50%_50%/55%_45%_55%_45%] overflow-hidden">
+        <img
+          src="/step3.jpg"
+          alt="Person taking a pet home"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-warm">
+          <span className="text-6xl">🏡</span>
+        </div>
+      </div>
+      <div className="absolute -top-2 -right-2 w-12 h-12 bg-cream border-4 border-warm rounded-full flex items-center justify-center shadow-md z-10">
+        <span className="font-display text-[1.3rem] font-bold text-rust">3</span>
+      </div>
+    </div>
+
+    <h3 className="font-display text-[1.3rem] font-semibold text-bark-dark mb-3">
+      Visit & Adopt
+    </h3>
+    <p className="text-text-mid text-[14.5px] leading-relaxed max-w-[240px]">
+      Visit the locality, meet the animal, and if it feels right — take them
+      home. Give a stray the forever family they deserve.
+    </p>
+  </div>
+
+</div>
+
+{/* Bottom CTA */}
+<div className="text-center mt-16">
+  <p className="text-text-light text-[14px] mb-4">Ready to make a difference?</p>
+  <div className="flex items-center justify-center gap-4 flex-wrap">
+
+<Link
+  to="/pets"
+  className="inline-flex items-center gap-2 bg-rust text-cream px-7 py-3.5 rounded-full text-[14px] font-medium shadow-[0_4px_16px_rgba(192,87,42,0.3)] hover:bg-rust-hover hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+>
+  Browse Animals 🐾
+</Link>
+
+<Link
+  to="/post"
+  className="inline-flex items-center gap-2 bg-transparent text-bark border-2 border-bark px-7 py-3.5 rounded-full text-[14px] font-medium hover:bg-warm transition-all duration-200 active:scale-95"
+>
+  Post a Stray
+</Link>
+
+</div>
+</div>
+</section>
+        
+<PetGrid />      
+<ReviewGrid />
     </main>
   );
 }
