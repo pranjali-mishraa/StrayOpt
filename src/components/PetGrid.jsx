@@ -1,9 +1,12 @@
 import React from "react";
 import PetCard from "./PetCard";
-import { samplePets } from "./DummyData/PetsData";
-import { Link } from "react-router-dom";
+import { usePets } from "../hooks/usePets";
+import LoadingGrid from "../components/common/LoadingGrid";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 export default function PetGrid() {
+  const { pets, loading, error } = usePets();
+
   return (
     <section className="bg-cream py-20 px-6">
 
@@ -24,14 +27,16 @@ export default function PetGrid() {
         </p>
       </div>
 
-      {/* Cards grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {samplePets.map(pet => (
-          <PetCard key={pet.id} pet={pet} />
-        ))}
-      </div>
-
-      
+      {/* States */}
+      {loading && <LoadingGrid count={6} />}
+      {error   && <ErrorMessage message={error} />}
+      {!loading && !error && (
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pets.map(pet => (
+            <PetCard key={pet.id} pet={pet} />
+          ))}
+        </div>
+      )}
 
     </section>
   );

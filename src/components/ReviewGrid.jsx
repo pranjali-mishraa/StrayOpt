@@ -1,8 +1,12 @@
 import React from "react";
 import ReviewCard from "./ReviewCard";
-import { sampleReviews } from "./DummyData/ReviewData";
+import { useReviews } from "../hooks/useReviews";
+import LoadingGrid from "../components/common/LoadingGrid";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 export default function ReviewGrid() {
+  const { reviews, loading, error } = useReviews();
+
   return (
     <section className="bg-warm py-20 px-6">
 
@@ -23,12 +27,16 @@ export default function ReviewGrid() {
         </p>
       </div>
 
-      {/* Cards grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sampleReviews.map(review => (
-          <ReviewCard key={review.id} review={review} />
-        ))}
-      </div>
+      {/* States */}
+      {loading && <LoadingGrid count={6} />}
+      {error   && <ErrorMessage message={error} />}
+      {!loading && !error && (
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map(review => (
+            <ReviewCard key={review.id} review={review} />
+          ))}
+        </div>
+      )}
 
     </section>
   );
