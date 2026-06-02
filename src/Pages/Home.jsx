@@ -238,12 +238,7 @@ export default function Home() {
   <p className="text-text-light text-[14px] mb-4">Ready to make a difference?</p>
   <div className="flex items-center justify-center gap-4 flex-wrap">
 
-<Link
-  to="/pets"
-  className="inline-flex items-center gap-2 bg-rust text-cream px-7 py-3.5 rounded-full text-[14px] font-medium shadow-[0_4px_16px_rgba(192,87,42,0.3)] hover:bg-rust-hover hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
->
-  Browse Animals 🐾
-</Link>
+
 
 <Link
   to="/post"

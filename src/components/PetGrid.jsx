@@ -31,16 +31,7 @@ export default function PetGrid() {
         ))}
       </div>
 
-      {/* View all button */}
-      <div className="text-center mt-12">
-        
-      <Link
-          to="/pets"
-          className="inline-flex items-center gap-2 border-2 border-bark text-bark px-8 py-3 rounded-full text-[14px] font-medium hover:bg-warm transition-all duration-200 active:scale-95"
-        >
-          View All Animals 🐾
-        </Link>
-      </div>
+      
 
     </section>
   );

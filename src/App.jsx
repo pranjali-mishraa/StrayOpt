@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
+import Footer from "./components/Footer";
 // Pages — add imports here as you build each page
 // import Home     from "./pages/Home/Home";
 // import About    from "./pages/About/About";
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>
+        <Footer/>
       </div>
     </BrowserRouter>
   );
