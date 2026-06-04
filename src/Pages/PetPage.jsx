@@ -33,29 +33,28 @@ export default function Pets() {
 
 {/* Banner image */}
 <img
-  src="/pets-banner.jpg"
+  src="/pets-banner.png"
   alt="Stray animals looking for a home"
   className="absolute inset-0 w-full h-full object-cover object-center"
 />
 
 {/* Dark overlay so text stays readable */}
-<div className="absolute inset-0 bg-bark-dark/60" />
+{/* Subtle gradient only at bottom for text readability */}
+<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
 {/* Content on top */}
 <div className="relative z-10 px-6 py-16 text-center">
   <div className="flex items-center justify-center gap-3 mb-2">
-    <span className="w-8 h-[2px] bg-rust rounded-full" />
-    <p className="text-rust text-[13px] font-medium uppercase tracking-widest">
+    <span className="w-8 h-[2px] bg-bark-dark rounded-full" />
+    <p className="text-bark-dark text-[13px] font-medium uppercase tracking-widest">
       Open for Adoption
     </p>
-    <span className="w-8 h-[2px] bg-rust rounded-full" />
+    <span className="w-8 h-[2px] bg-bark-darkrounded-full" />
   </div>
-  <h1 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-cream mb-2">
+  <h1 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-bark-dark mb-2">
     Available Pets
   </h1>
-  <p className="text-cream/70 text-[14px] mb-6">
-    {detailedPets.length} animals posted by caring people in your community
-  </p>
+  
 
   {/* Search */}
   <div className="max-w-md mx-auto flex items-center gap-2 bg-white border border-border-brand rounded-full px-4 py-2.5 shadow-sm focus-within:border-bark transition-colors duration-200">
