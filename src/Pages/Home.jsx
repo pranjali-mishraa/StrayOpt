@@ -49,30 +49,26 @@ export default function Home() {
 
           {/* CTA Button */}
           <Link
-            to="/pets"
-            className="
-              inline-flex items-center gap-3
-              bg-rust text-cream
-              px-8 py-4 rounded-full
-              text-[15px] font-medium
-              shadow-[0_4px_20px_rgba(192,87,42,0.35)]
-              transition-all duration-300
-              hover:bg-rust-hover hover:shadow-[0_6px_28px_rgba(192,87,42,0.45)] hover:-translate-y-0.5
-              active:scale-95
-            "
-          >
-            View Available Pets
-            <span className="bg-white/20 rounded-full p-1">
-              <svg
-                width="14" height="14" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor"
-                strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
+  to="/pets"
+  className="
+    inline-flex items-center gap-3
+    bg-rust text-cream
+    px-8 py-4 rounded-full
+    text-[15px] font-medium
+    shadow-[0_4px_20px_rgba(192,87,42,0.35)]
+    transition-all duration-300
+    hover:bg-rust-hover hover:shadow-[0_6px_28px_rgba(192,87,42,0.45)] hover:-translate-y-0.5
+    active:scale-95
+  "
+>
+  View Available Pets
+  <span className="bg-white/20 rounded-full p-1">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  </span>
+</Link>
 
           {/* Stats row */}
           <div className="flex items-center gap-8 mt-12 pt-8 border-t border-border-brand">

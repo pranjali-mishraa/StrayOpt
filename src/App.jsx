@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import Footer from "./components/Footer";
+import PetPage from "./Pages/PetPage";
+
 // Pages — add imports here as you build each page
 // import Home     from "./pages/Home/Home";
 // import About    from "./pages/About/About";
@@ -31,6 +33,7 @@ export default function App() {
           <Route path="/profile"  element={<div>Profile page coming soon 🐾</div>} />
           <Route path="/messages" element={<div>Messages page coming soon 🐾</div>} />
           <Route path="/post"     element={<div>Post a stray coming soon 🐾</div>} />
+          <Route path="/pets" element={<PetPage />} />
 
           {/* ── Catch-all → redirect home ── */}
           <Route path="*" element={<Navigate to="/" replace />} />
