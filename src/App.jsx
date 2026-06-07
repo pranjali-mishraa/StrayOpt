@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import Footer from "./components/Footer";
 import PetPage from "./Pages/PetPage";
+import Login from "./Pages/Login";
 
 // Pages — add imports here as you build each page
 // import Home     from "./pages/Home/Home";
@@ -28,7 +29,7 @@ export default function App() {
           <Route path="/about"  element={<div>About page coming soon 🐾</div>} />
           <Route path="/login"  element={<div>Login page coming soon 🐾</div>} />
           <Route path="/register" element={<div>Register page coming soon 🐾</div>} />
-
+          <Route path="/login" element={<Login />} />
           {/* ── Protected routes (swap placeholder once pages are built) ── */}
           <Route path="/profile"  element={<div>Profile page coming soon 🐾</div>} />
           <Route path="/messages" element={<div>Messages page coming soon 🐾</div>} />
