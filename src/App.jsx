@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import Footer from "./components/Footer";
 import PetPage from "./Pages/PetPage";
 import Login from "./Pages/Login";
-
+import PostStray from "./Pages/PostStray";
 // Pages — add imports here as you build each page
 // import Home     from "./pages/Home/Home";
 // import About    from "./pages/About/About";
@@ -27,13 +27,14 @@ export default function App() {
           {/* ── Public routes ── */}
           <Route path="/" element={<Home />} />
           <Route path="/about"  element={<div>About page coming soon 🐾</div>} />
-          <Route path="/login"  element={<div>Login page coming soon 🐾</div>} />
+         
           <Route path="/register" element={<div>Register page coming soon 🐾</div>} />
           <Route path="/login" element={<Login />} />
           {/* ── Protected routes (swap placeholder once pages are built) ── */}
+          <Route path="/post" element={<PostStray />} />
           <Route path="/profile"  element={<div>Profile page coming soon 🐾</div>} />
           <Route path="/messages" element={<div>Messages page coming soon 🐾</div>} />
-          <Route path="/post"     element={<div>Post a stray coming soon 🐾</div>} />
+        
           <Route path="/pets" element={<PetPage />} />
 
           {/* ── Catch-all → redirect home ── */}
