@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import PetPage from "./Pages/PetPage";
 import Login from "./Pages/Login";
 import PostStray from "./Pages/PostStray";
+import Profile from "./Pages/Profile";
 // Pages — add imports here as you build each page
 // import Home     from "./pages/Home/Home";
 // import About    from "./pages/About/About";
@@ -32,7 +33,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           {/* ── Protected routes (swap placeholder once pages are built) ── */}
           <Route path="/post" element={<PostStray />} />
-          <Route path="/profile"  element={<div>Profile page coming soon 🐾</div>} />
+          <Route path="/profile"  element={<Profile/>} />
           <Route path="/messages" element={<div>Messages page coming soon 🐾</div>} />
         
           <Route path="/pets" element={<PetPage />} />

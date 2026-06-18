@@ -1,5 +1,5 @@
 import React from "react";
-import MyPostCard from "./MyPostCard";
+import MyPostCards from "./MyPostCards";
 import EmptyState from "./EmptyState";
 
 export default function MyPostsTab({ posts, onAdopt, onDelete }) {
@@ -28,7 +28,7 @@ export default function MyPostsTab({ posts, onAdopt, onDelete }) {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
             {activePosts.map(post => (
-              <MyPostCard
+              <MyPostCards
                 key={post.id}
                 post={post}
                 onAdopt={() => onAdopt(post.id)}
@@ -47,7 +47,7 @@ export default function MyPostsTab({ posts, onAdopt, onDelete }) {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {adoptedPosts.map(post => (
-              <MyPostCard
+              <MyPostCards
                 key={post.id}
                 post={post}
                 onDelete={() => onDelete(post.id)}
