@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  const [isLogin, setIsLogin]       = useState(true);
+  const [isLogin, setIsLogin]           = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm]   = useState(false);
   const [loading, setLoading]           = useState(false);
@@ -11,71 +11,101 @@ export default function Login() {
 
   const [form, setForm] = useState({
     firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirm: "",
-    otp: "",
+    lastName:  "",
+    email:     "",
+    password:  "",
+    confirm:   "",
+    otp:       "",
   });
 
+  // ── Switch tab ───────────────────────────────
+  function switchTab(toLogin) {
+    setIsLogin(toLogin);
+    setErrors({});
+    setOtpSent(false);
+    setForm({ firstName:"", lastName:"", email:"", password:"", confirm:"", otp:"" });
+  }
+
+  // ── Field change ─────────────────────────────
   function handleChange(e) {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }));
   }
 
+  // ── Validation ───────────────────────────────
   function validate() {
-    const newErrors = {};
+    const e = {};
     if (!isLogin) {
-      if (!form.firstName.trim()) newErrors.firstName = "First name is required";
-      if (!form.lastName.trim())  newErrors.lastName  = "Last name is required";
-      if (form.password !== form.confirm) newErrors.confirm = "Passwords do not match";
-      if (form.password.length < 6) newErrors.password = "Minimum 6 characters";
+      if (!form.firstName.trim()) e.firstName = "First name is required";
+      if (!form.lastName.trim())  e.lastName  = "Last name is required";
+      if (form.password.length < 6) e.password = "Minimum 6 characters";
+      if (form.password !== form.confirm) e.confirm = "Passwords do not match";
     }
-    if (!form.email.trim())    newErrors.email    = "Email is required";
-    if (!form.password.trim()) newErrors.password = "Password is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!form.email.trim())    e.email    = "Email is required";
+    if (!form.password.trim()) e.password = e.password || "Password is required";
+    setErrors(e);
+    return Object.keys(e).length === 0;
   }
 
-  // ── This will call your Node.js API in future ──
+  // ── Submit ───────────────────────────────────
   async function handleSubmit(e) {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
 
-    // TODO: replace with real API call
-    // const res = await fetch("/api/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email: form.email, password: form.password })
-    // });
+    if (isLogin) {
+      // TODO: POST /api/auth/login
+      // const res  = await fetch("/api/auth/login", {
+      //   method:  "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body:    JSON.stringify({ email: form.email, password: form.password }),
+      // });
+      // const data = await res.json();
+      // localStorage.setItem("token", data.token);
+      // navigate("/");
+      await new Promise(r => setTimeout(r, 1500));
+      setLoading(false);
+      alert("Login successful! (wire to API later)");
 
-    await new Promise(r => setTimeout(r, 1500)); // dummy delay
-    setLoading(false);
-
-    if (!isLogin) {
-      // TODO: after register → trigger OTP send
+    } else {
+      // TODO: POST /api/auth/signup
+      // const res = await fetch("/api/auth/signup", {
+      //   method:  "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body:    JSON.stringify({
+      //     firstName: form.firstName,
+      //     lastName:  form.lastName,
+      //     email:     form.email,
+      //     password:  form.password,
+      //   }),
+      // });
+      // on success → backend sends OTP to email
+      await new Promise(r => setTimeout(r, 1500));
+      setLoading(false);
       setOtpSent(true);
     }
   }
 
-  // ── Will call /api/auth/verify-otp in future ──
+  // ── OTP Verify ───────────────────────────────
   async function handleOtpVerify(e) {
     e.preventDefault();
     if (!form.otp.trim()) return setErrors({ otp: "Please enter the OTP" });
     setLoading(true);
 
-    // TODO: replace with real API call
+    // TODO: POST /api/auth/verify-otp
     // const res = await fetch("/api/auth/verify-otp", {
-    //   method: "POST",
+    //   method:  "POST",
     //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email: form.email, otp: form.otp })
+    //   body:    JSON.stringify({ email: form.email, otp: form.otp }),
     // });
+    // const data = await res.json();
+    // localStorage.setItem("token", data.token);
+    // navigate("/");
 
     await new Promise(r => setTimeout(r, 1500));
     setLoading(false);
-    alert("OTP Verified! (wire to real API later)");
+    alert("OTP Verified! (wire to API later)");
   }
 
   return (
@@ -101,20 +131,15 @@ export default function Login() {
 
         {/* Center content */}
         <div className="relative z-10">
-          {/* Floating paw */}
           <div className="text-[72px] mb-6 animate-float inline-block">🐾</div>
-
           <h2 className="font-display text-[2.2rem] font-light text-cream leading-tight mb-4">
             Give a stray<br />
             <em className="italic text-rust">a reason to wag</em>
           </h2>
-
           <p className="text-cream/60 text-[14px] leading-relaxed mb-10 max-w-[300px]">
             Join thousands of caring people across India helping stray animals
             find their forever homes.
           </p>
-
-          {/* Stats */}
           <div className="flex gap-8">
             {[
               { num: "1,240", label: "Animals Posted" },
@@ -142,19 +167,20 @@ export default function Login() {
       {/* ── Right form side ── */}
       <div className="flex-1 flex items-center justify-center px-6 py-12 relative overflow-hidden">
 
-        {/* Subtle background paw watermark */}
+        {/* Paw watermark */}
         <div className="absolute bottom-[-40px] right-[-40px] text-[200px] opacity-[0.03] select-none pointer-events-none rotate-12">
           🐾
         </div>
 
         <div className="w-full max-w-[420px] relative z-10">
 
-          {/* ── Toggle: Login / Register ── */}
+          {/* ── Tab toggle ── */}
           <div className="flex bg-warm rounded-2xl p-1 mb-8 border border-border-brand">
-            {["Sign In", "Register"].map((tab, i) => (
+            {["Login", "Sign Up"].map((tab, i) => (
               <button
                 key={tab}
-                onClick={() => { setIsLogin(i === 0); setErrors({}); setOtpSent(false); }}
+                type="button"
+                onClick={() => switchTab(i === 0)}
                 className={`flex-1 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-300 ${
                   isLogin === (i === 0)
                     ? "bg-bark-dark text-cream shadow-md"
@@ -173,13 +199,13 @@ export default function Login() {
                 ? "Verify your email"
                 : isLogin
                 ? "Welcome back 👋"
-                : "Create account"}
+                : "Create your account"}
             </h1>
             <p className="text-text-light text-[14px] mt-1">
               {otpSent
                 ? `We sent a 6-digit OTP to ${form.email}`
                 : isLogin
-                ? "Sign in to continue helping strays find homes"
+                ? "Login to continue helping strays find homes"
                 : "Join StrayOpt and start making a difference"}
             </p>
           </div>
@@ -187,8 +213,6 @@ export default function Login() {
           {/* ── OTP Screen ── */}
           {otpSent ? (
             <form onSubmit={handleOtpVerify} noValidate>
-
-              {/* OTP input */}
               <div className="mb-5">
                 <label className="block text-[13px] font-medium text-text-mid mb-1.5">
                   Enter OTP
@@ -201,9 +225,14 @@ export default function Login() {
                   value={form.otp}
                   onChange={handleChange}
                   className={`w-full h-12 px-4 text-center text-[1.4rem] tracking-[0.5em] border rounded-xl outline-none transition-all duration-200 placeholder:text-text-light/40 placeholder:tracking-normal
-                    ${errors.otp ? "border-red-400 ring-2 ring-red-100" : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"}`}
+                    ${errors.otp
+                      ? "border-red-400 ring-2 ring-red-100"
+                      : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"
+                    }`}
                 />
-                {errors.otp && <p className="text-red-500 text-[12px] mt-1">{errors.otp}</p>}
+                {errors.otp && (
+                  <p className="text-red-500 text-[12px] mt-1">{errors.otp}</p>
+                )}
               </div>
 
               <button
@@ -221,7 +250,6 @@ export default function Login() {
               >
                 ← Go back
               </button>
-
             </form>
 
           ) : (
@@ -229,7 +257,7 @@ export default function Login() {
             // ── Main form ──
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
 
-              {/* First + Last name — register only */}
+              {/* First + Last name — Sign Up only */}
               {!isLogin && (
                 <div className="grid grid-cols-2 gap-3">
                   <Field
@@ -280,12 +308,15 @@ export default function Login() {
                   <input
                     name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Min. 6 characters"
+                    placeholder={isLogin ? "Enter your password" : "Min. 6 characters"}
                     value={form.password}
                     onChange={handleChange}
                     autoComplete={isLogin ? "current-password" : "new-password"}
                     className={`w-full h-11 pl-10 pr-10 border rounded-xl text-[14px] text-text outline-none transition-all duration-200 placeholder:text-text-light
-                      ${errors.password ? "border-red-400 ring-2 ring-red-100" : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"}`}
+                      ${errors.password
+                        ? "border-red-400 ring-2 ring-red-100"
+                        : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"
+                      }`}
                   />
                   <button
                     type="button"
@@ -295,10 +326,12 @@ export default function Login() {
                     {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                   </button>
                 </div>
-                {errors.password && <p className="text-red-500 text-[12px] mt-1">{errors.password}</p>}
+                {errors.password && (
+                  <p className="text-red-500 text-[12px] mt-1">{errors.password}</p>
+                )}
               </div>
 
-              {/* Confirm password — register only */}
+              {/* Confirm password — Sign Up only */}
               {!isLogin && (
                 <div>
                   <label className="block text-[13px] font-medium text-text-mid mb-1.5">
@@ -311,12 +344,15 @@ export default function Login() {
                     <input
                       name="confirm"
                       type={showConfirm ? "text" : "password"}
-                      placeholder="Repeat password"
+                      placeholder="Repeat your password"
                       value={form.confirm}
                       onChange={handleChange}
                       autoComplete="new-password"
                       className={`w-full h-11 pl-10 pr-10 border rounded-xl text-[14px] text-text outline-none transition-all duration-200 placeholder:text-text-light
-                        ${errors.confirm ? "border-red-400 ring-2 ring-red-100" : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"}`}
+                        ${errors.confirm
+                          ? "border-red-400 ring-2 ring-red-100"
+                          : "border-border-brand focus:border-bark focus:ring-2 focus:ring-bark/20"
+                        }`}
                     />
                     <button
                       type="button"
@@ -326,14 +362,19 @@ export default function Login() {
                       {showConfirm ? <EyeOffIcon /> : <EyeIcon />}
                     </button>
                   </div>
-                  {errors.confirm && <p className="text-red-500 text-[12px] mt-1">{errors.confirm}</p>}
+                  {errors.confirm && (
+                    <p className="text-red-500 text-[12px] mt-1">{errors.confirm}</p>
+                  )}
                 </div>
               )}
 
-              {/* Forgot password — login only */}
+              {/* Forgot password — Login only */}
               {isLogin && (
                 <div className="text-right -mt-1">
-                  <button type="button" className="text-[13px] text-rust hover:opacity-75 transition-opacity">
+                  <button
+                    type="button"
+                    className="text-[13px] text-rust hover:opacity-75 transition-opacity"
+                  >
                     Forgot password?
                   </button>
                 </div>
@@ -348,15 +389,40 @@ export default function Login() {
                 {loading
                   ? <Spinner />
                   : isLogin
-                  ? "Sign In"
-                  : "Create Account & Get OTP 🐾"
+                  ? "Login"
+                  : "Sign Up & Get OTP 🐾"
                 }
               </button>
 
-              {/* OTP note for register */}
+              {/* OTP note — Sign Up only */}
               {!isLogin && (
                 <p className="text-[12px] text-text-light text-center">
-                  After registering, a 6-digit OTP will be sent to your email to verify your account.
+                  A 6-digit OTP will be sent to your email to verify your account.
+                </p>
+              )}
+
+              {/* ── Tab switch prompt ── */}
+              {isLogin ? (
+                <p className="text-center text-[14px] text-text-light mt-2">
+                  Don't have an account?{" "}
+                  <button
+                    type="button"
+                    onClick={() => switchTab(false)}
+                    className="text-rust font-medium hover:opacity-75 transition-opacity"
+                  >
+                    Sign Up free
+                  </button>
+                </p>
+              ) : (
+                <p className="text-center text-[14px] text-text-light mt-2">
+                  Already have an account?{" "}
+                  <button
+                    type="button"
+                    onClick={() => switchTab(true)}
+                    className="text-rust font-medium hover:opacity-75 transition-opacity"
+                  >
+                    Login
+                  </button>
                 </p>
               )}
 
@@ -369,7 +435,7 @@ export default function Login() {
   );
 }
 
-// ── Reusable field component ─────────────────────
+// ── Reusable field ────────────────────────────────────
 function Field({ label, name, type, placeholder, value, onChange, error, autoComplete, icon }) {
   return (
     <div>
@@ -402,7 +468,7 @@ function Field({ label, name, type, placeholder, value, onChange, error, autoCom
   );
 }
 
-// ── Icons ────────────────────────────────────────
+// ── Icons ─────────────────────────────────────────────
 function EnvelopeIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -448,8 +514,10 @@ function Spinner() {
   return (
     <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-        strokeOpacity="0.3" />
+      <path
+        d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+        strokeOpacity="0.3"
+      />
       <path d="M12 2v4" />
     </svg>
   );

@@ -26,7 +26,7 @@ export default function App() {
       
          
           <Route path="/about" element={<About />} />
-          <Route path="/register" element={<div>Register page coming soon 🐾</div>} />
+      
           <Route path="/login" element={<Login />} />
           {/* ── Protected routes (swap placeholder once pages are built) ── */}
           <Route path="/post" element={<PostStray />} />
