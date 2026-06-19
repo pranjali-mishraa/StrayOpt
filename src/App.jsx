@@ -8,12 +8,8 @@ import PetPage from "./Pages/PetPage";
 import Login from "./Pages/Login";
 import PostStray from "./Pages/PostStray";
 import Profile from "./Pages/Profile";
-// Pages — add imports here as you build each page
-// import Home     from "./pages/Home/Home";
-// import About    from "./pages/About/About";
-// import Login    from "./pages/Login/Login";
-// import Register from "./pages/Register/Register";
-// import Profile  from "./pages/Profile/Profile";
+import About from "./Pages/About";
+
 
 export default function App() {
   return (
@@ -27,8 +23,9 @@ export default function App() {
 
           {/* ── Public routes ── */}
           <Route path="/" element={<Home />} />
-          <Route path="/about"  element={<div>About page coming soon 🐾</div>} />
+      
          
+          <Route path="/about" element={<About />} />
           <Route path="/register" element={<div>Register page coming soon 🐾</div>} />
           <Route path="/login" element={<Login />} />
           {/* ── Protected routes (swap placeholder once pages are built) ── */}
